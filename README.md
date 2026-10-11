@@ -1,4 +1,4 @@
-# Integrantes
+## Integrantes
 
 | Proyecto 2 |
 | :-: |
@@ -9,17 +9,8 @@
 | Lucas Roilar |
 | José Ignacio Ventura |
 
-# Propósito y motivación
+## Propósito y motivación
 
-# Aspectos técnicos relevantes
+## Aspectos técnicos relevantes
 
-# Instrucciones de ejecución
-
-
-Bastián Campos Meléndez
-Cristobal Cordova Weippert
-Benjamín Echeverría Araya
-Javier Gacitua Sola
-Lucas Roilar Riquelme
-José Ignacio Ventura Peirano
-
+## Instrucciones de ejecución
