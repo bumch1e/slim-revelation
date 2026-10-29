@@ -1,11 +1,54 @@
 .nav-bar__link {
-  display: inline-block;
-  margin-right: 15px;
-  padding: 8px;
-  color: rgb(4, 100, 253);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 4px;
+  border-radius: 12px;
+  color: #475569;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  gap: 2px;
+}
 
-  &--active {
-    background: #222;
-    color: white;
-  }
+.nav-bar__link:hover {
+  background-color: #f1f5f9;
+  color: #0f766e;
+}
+
+.nav-bar__link--active {
+  background-color: #f0fdfa;
+  color: #0f766e;
+  box-shadow: inset 0 0 0 1.5px #14b8a6;
+}
+
+.nav-bar__icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.nav-bar__label {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.nav-bar__badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.nav-bar__link--active .nav-bar__badge {
+  background: #ccfbf1;
+  color: #0f766e;
+}
+
+.nav-bar__badge--alert {
+  background: #fee2e2 !important;
+  color: #b91c1c !important;
 }
