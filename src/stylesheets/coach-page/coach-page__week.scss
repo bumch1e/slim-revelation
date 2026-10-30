@@ -1,0 +1,61 @@
+/* Bloque "Tu semana" del Consultor (Meta 2): promedios de 7 dias que respaldan
+   las respuestas. Es solo informativo, por eso ninguna barra es clickeable. */
+.week-chart {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  align-items: end;
+  margin-top: 14px;
+  padding: 12px 8px 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.week-chart__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.week-chart__value {
+  font-size: 10px;
+  font-weight: 700;
+  color: #475569;
+}
+
+.week-chart__track {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: flex-end;
+  background: #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.week-chart__bar {
+  width: 100%;
+  min-height: 4px;
+  background: #94a3b8;
+  border-radius: 6px 6px 0 0;
+  transition: height 0.25s ease;
+}
+
+.week-chart__bar--on-target {
+  background: #0f766e;
+}
+
+.week-chart__day {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.week-chart__legend {
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: #64748b;
+}
