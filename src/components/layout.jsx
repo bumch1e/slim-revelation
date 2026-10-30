@@ -100,7 +100,7 @@ const LayoutShell = () => {
             </div>
             <div className='layout__toast-actions'>
               <NavLink
-                to='/habitos'
+                to='/habitos#tus-logros'
                 className='layout__toast-link'
                 onClick={clearAchievementNotification}
               >

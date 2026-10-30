@@ -1,0 +1,206 @@
+/* Listas de actividades por categoría y formulario para agregar.
+   Reemplaza las reglas .habit-* que estaban en stylesheets/index.scss. */
+
+.habit-group {
+  & + & {
+    margin-top: 18px;
+  }
+}
+
+.habit-group__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.habit-group__title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.habit-group__count {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f766e;
+}
+
+.habit-group__empty {
+  margin: 10px 0 0;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #475569;
+}
+
+.habit-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.habit-item {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+}
+
+/* Toda la tarjeta es el botón (Feedback U05: Facundo Riquelme) */
+.habit-card {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 10px 12px;
+  font: inherit;
+  text-align: left;
+  color: #0f172a;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    border-color: #14b8a6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #14b8a6;
+    outline-offset: 2px;
+  }
+}
+
+.habit-card--done {
+  background: #f0fdfa;
+  border-color: #14b8a6;
+}
+
+.habit-card--flash {
+  animation: habit-card-flash 1.8s ease-out;
+}
+
+.habit-card__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.habit-card__check {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  color: #ffffff;
+  background: #ffffff;
+  border: 2px solid #94a3b8;
+  border-radius: 6px;
+}
+
+.habit-card--done .habit-card__check {
+  background: #0f766e;
+  border-color: #0f766e;
+}
+
+.habit-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.habit-card__title {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.habit-card__category {
+  font-size: 12px;
+  color: #475569;
+}
+
+.habit-card__points {
+  flex-shrink: 0;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #0f766e;
+  background: #ccfbf1;
+  border-radius: 999px;
+}
+
+.habit-item__remove {
+  flex: 0 0 40px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: #b91c1c;
+  background: #fee2e2;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+
+  &:hover {
+    background: #fecaca;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #b91c1c;
+    outline-offset: 2px;
+  }
+}
+
+.habit-form {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.habit-form__select {
+  flex: 1 1 100%;
+}
+
+.habit-form__submit {
+  flex: 0 0 auto;
+
+  &:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+  }
+}
+
+@keyframes habit-card-flash {
+  0%,
+  35% {
+    background: #fef3c7;
+    border-color: #f59e0b;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .habit-card {
+    transition: none;
+  }
+
+  .habit-card--flash {
+    animation: none;
+    border-color: #f59e0b;
+  }
+}
