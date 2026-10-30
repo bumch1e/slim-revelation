@@ -1,4 +1,5 @@
 import React from 'react'
+import '../stylesheets/components/frequent-foods.css'
 
 /**
  * Sección "Mis alimentos frecuentes": añade comidas guardadas con un toque.

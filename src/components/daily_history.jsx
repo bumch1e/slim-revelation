@@ -1,4 +1,5 @@
 import React from 'react'
+import '../stylesheets/components/daily-history.css'
 
 /**
  * Listado de alimentos registrados hoy, con botón para eliminar ingresos erróneos.
