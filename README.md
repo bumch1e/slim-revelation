@@ -1,35 +1,49 @@
-# frontend-sample-app
+# slim-relevation
 
-Basic Frontend Development Environment to start an app with Webpack
+## Integrantes 
 
-This repo includes `Webpack` to start an environment to build frontend views using `React`.
+| Proyecto 2 |
+| :-: |
+| Bastián Campos |
+| Cristobal Cordova |
+| Benjamín Echeverría |
+| Javier Gacitua |
+| Lucas Roilar |
+| José Ignacio Ventura |
 
-### Requirements
+## Propósito 
 
-- Node >= 16.13.1
-- npm >= 8.1.2
+*Slim Revelation* es un *MVP* que busca solucionar algunas falencias observadas
+del sistema *fatsecret* con respecto al tema de la alimentación y hábitos saludables.
 
-### Quick start
+La interfaz fue diseñada a partir de los comentarios de varios usuarios entrevistados en
+el contexto del ramo INF-322: Diseño de interfaces usuarias.
 
-Install dependences
+## Herramientas utilizadas
 
-```
+El repositorio se construye a partir de un repositorio ejemplo de *frontend* en React + Webpack.
+
+Las herramientas utilizadas son:
+- Node >= 22.20.0
+- npm >= 11.16.0
+- Webpack
+- React Router
+
+## Instrucciones de ejecución
+
+> ***NOTA:*** Los comandos se ejecutan desde el directorio raíz.
+
+Para instalar dependencias:
+
+```bash
 npm install
 ```
 
-Launch environment
+Para desplegar el entorno:
 
-```
+```bash
 npm run dev
 ```
 
-Now you can open http://localhost:5050
+La interfaz se puede revisar en `http://localhost:5050`
 
-### Packages included
-
-- [Webpack](https://webpack.js.org/)
-- [React Router](https://reactrouter.com/en/main)
-
-### About stylesheets
-
-- Sample stylesheets were written using the [BEM](https://getbem.com/) structure
