@@ -113,6 +113,17 @@ export const INITIAL_STATE = {
       sourceId: 'src-issn',
       timestamp: 'Hoy, 14:20'
     }
+  ],
+  // Resumen de los últimos 7 días para el bloque "Tu semana" del Consultor (Meta 2).
+  // Coherente con las respuestas precargadas: promedio 2.310 kcal y 124 g de proteína (5 de 7 días en meta).
+  weeklySummary: [
+    { day: 'Lun', calories: 2280, protein: 132, waterLiters: 2.4 },
+    { day: 'Mar', calories: 2350, protein: 131, waterLiters: 2.6 },
+    { day: 'Mié', calories: 2410, protein: 135, waterLiters: 2.8 },
+    { day: 'Jue', calories: 2180, protein: 118, waterLiters: 2.0 },
+    { day: 'Vie', calories: 2300, protein: 130, waterLiters: 2.5 },
+    { day: 'Sáb', calories: 2520, protein: 140, waterLiters: 3.0 },
+    { day: 'Dom', calories: 2130, protein: 82, waterLiters: 2.2 }
   ]
 }
 
@@ -199,7 +210,9 @@ export const AppProvider = ({ children }) => {
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY)
       if (saved) {
-        return JSON.parse(saved)
+        // Fusionar con INITIAL_STATE: un estado guardado antes de agregar un campo nuevo
+        // (ej. weeklySummary) lo dejaría en undefined y rompería la vista al recargar
+        return { ...INITIAL_STATE, ...JSON.parse(saved) }
       }
     } catch (err) {
       console.error('Error leyendo localStorage:', err)
@@ -237,6 +250,44 @@ export const AppProvider = ({ children }) => {
       .reduce((sum, act) => sum + Number(act.points || 0), 0)
     return (state.habits.bonusPoints || 0) + activityPoints
   }, [state.habits])
+
+  // Promedios de la semana que respaldan las respuestas del Consultor (Meta 2)
+  const weeklyStats = useMemo(() => {
+    const days = state.weeklySummary || []
+    const proteinGoal = state.userProfile.proteinGoalGrams || 130
+    const usesGlasses = state.userProfile.preferredWaterUnit === 'vasos'
+
+    if (days.length === 0) {
+      return {
+        avgCalories: 0,
+        avgProtein: 0,
+        proteinGoalPercent: 0,
+        daysOnTarget: 0,
+        totalDays: 0,
+        maxProtein: proteinGoal,
+        waterValue: 0,
+        waterUnitLabel: usesGlasses ? 'vasos (250 ml)' : 'litros'
+      }
+    }
+
+    const average = (key) =>
+      days.reduce((sum, day) => sum + Number(day[key] || 0), 0) / days.length
+
+    const avgProtein = Math.round(average('protein'))
+    const avgWaterLiters = Math.round(average('waterLiters') * 10) / 10
+
+    return {
+      avgCalories: Math.round(average('calories')),
+      avgProtein,
+      proteinGoalPercent: Math.round((avgProtein / proteinGoal) * 100),
+      daysOnTarget: days.filter((day) => Number(day.protein || 0) >= proteinGoal).length,
+      totalDays: days.length,
+      maxProtein: Math.max(proteinGoal, ...days.map((day) => Number(day.protein || 0))),
+      // Respetar la unidad elegida por la usuaria (Feedback U03: María Ignacia Tapia)
+      waterValue: usesGlasses ? Math.round((avgWaterLiters * 1000) / 250) : avgWaterLiters,
+      waterUnitLabel: usesGlasses ? 'vasos (250 ml)' : 'litros'
+    }
+  }, [state.weeklySummary, state.userProfile.proteinGoalGrams, state.userProfile.preferredWaterUnit])
 
   // Ordenar alimentos frecuentes por uso (Feedback U05: Facundo Riquelme)
   const sortedFrequentFoods = useMemo(() => {
@@ -433,6 +484,14 @@ export const AppProvider = ({ children }) => {
     return newQA
   }
 
+  // Permitir descartar respuestas para que el historial no crezca sin limite
+  const removeCoachAnswer = (answerId) => {
+    setState((prev) => ({
+      ...prev,
+      coachHistory: prev.coachHistory.filter((item) => item.id !== answerId)
+    }))
+  }
+
   // --- Acciones para Meta 3: Hábitos y Logros (Partes 5 y 6) ---
   const toggleHabitActivity = (activityId) => {
     setState((prev) => {
@@ -548,6 +607,8 @@ export const AppProvider = ({ children }) => {
     coachHistory: state.coachHistory,
     achievementsCatalog: ACHIEVEMENTS_CATALOG,
     officialSources: OFFICIAL_SOURCES,
+    weeklySummary: state.weeklySummary || [],
+    weeklyStats,
     totalCaloriesToday,
     calorieProgressPercent,
     isOverCalorieGoal,
@@ -558,6 +619,7 @@ export const AppProvider = ({ children }) => {
     addFrequentFoodToLog,
     removeLoggedFood,
     askCoachQuestion,
+    removeCoachAnswer,
     toggleHabitActivity,
     triggerQuickHabitAction,
     addCustomHabitActivity,

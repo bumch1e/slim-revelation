@@ -6,7 +6,10 @@ export const CoachPage = () => {
     userProfile,
     coachHistory,
     officialSources,
+    weeklySummary,
+    weeklyStats,
     askCoachQuestion,
+    removeCoachAnswer,
     updateUserProfile
   } = useApp()
 
@@ -85,14 +88,85 @@ export const CoachPage = () => {
       </div>
 
       <div className='section-card'>
+        <div className='section-card__header-row'>
+          <div>
+            <h3 className='section-card__heading'>Tu semana</h3>
+            <p className='section-card__helper'>
+              Promedio de los últimos {weeklyStats.totalDays} días. Estos son los datos con los que el
+              Consultor personaliza cada respuesta.
+            </p>
+          </div>
+          <span className='section-card__badge'>
+            {weeklyStats.daysOnTarget}/{weeklyStats.totalDays} días en meta
+          </span>
+        </div>
+
+        <div className='summary-grid'>
+          <div className='summary-stat'>
+            <span className='summary-stat__value'>{weeklyStats.avgCalories} kcal</span>
+            <span className='summary-stat__label'>Promedio diario</span>
+          </div>
+          <div className='summary-stat'>
+            <span className='summary-stat__value'>{weeklyStats.avgProtein} g</span>
+            <span className='summary-stat__label'>
+              Proteína ({weeklyStats.proteinGoalPercent}% de tu meta)
+            </span>
+          </div>
+          <div className='summary-stat'>
+            <span className='summary-stat__value'>{weeklyStats.waterValue}</span>
+            <span className='summary-stat__label'>Agua al día en {weeklyStats.waterUnitLabel}</span>
+          </div>
+        </div>
+
+        <div className='week-chart'>
+          {weeklySummary.map((day) => {
+            const onTarget = Number(day.protein) >= userProfile.proteinGoalGrams
+            const barHeight = Math.round((Number(day.protein) / weeklyStats.maxProtein) * 100)
+            return (
+              <div key={day.day} className='week-chart__col'>
+                <span className='week-chart__value'>{day.protein}</span>
+                <div className='week-chart__track'>
+                  <div
+                    className={`week-chart__bar ${onTarget ? 'week-chart__bar--on-target' : ''}`}
+                    style={{ height: `${barHeight}%` }}
+                  />
+                </div>
+                <span className='week-chart__day'>{day.day}</span>
+              </div>
+            )
+          })}
+        </div>
+        <p className='week-chart__legend'>
+          Gramos de proteína por día · meta {userProfile.proteinGoalGrams} g (barra destacada = meta cumplida)
+        </p>
+      </div>
+
+      <div className='section-card'>
         <h3 className='section-card__heading'>Respuestas del Consultor</h3>
+        {coachHistory.length === 0 && (
+          <p className='qa-list__empty'>
+            Aún no tienes consultas guardadas. Usa el buscador o toca una de las preguntas frecuentes.
+          </p>
+        )}
+
         <div className='qa-list'>
           {coachHistory.map((item) => {
             const source = officialSources.find((s) => s.id === item.sourceId) || officialSources[0]
             return (
               <article key={item.id} className='qa-card'>
-                <div className='qa-card__question'>
-                  <strong>Tú:</strong> {item.question}
+                <div className='qa-card__header'>
+                  <div className='qa-card__question'>
+                    <strong>Tú:</strong> {item.question}
+                  </div>
+                  <button
+                    type='button'
+                    className='qa-card__delete'
+                    onClick={() => removeCoachAnswer(item.id)}
+                    title='Eliminar esta consulta'
+                    aria-label='Eliminar esta consulta'
+                  >
+                    ×
+                  </button>
                 </div>
                 <p className='qa-card__answer'>{item.answer}</p>
                 <div className='qa-card__source'>

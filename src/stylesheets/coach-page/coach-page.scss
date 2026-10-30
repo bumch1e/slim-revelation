@@ -1,0 +1,39 @@
+/* Ajustes de la lista de respuestas del Consultor.
+   Las reglas base de .qa-card siguen en stylesheets/index.scss. */
+.qa-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.qa-card__delete {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fee2e2;
+  color: #b91c1c;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.qa-card__delete:hover {
+  background: #fecaca;
+}
+
+.qa-list__empty {
+  margin: 12px 0 0;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #64748b;
+}
