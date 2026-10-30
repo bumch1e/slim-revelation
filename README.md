@@ -1,4 +1,4 @@
-# slim-relevation
+# slim-revelation
 
 ## Integrantes 
 
