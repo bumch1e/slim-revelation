@@ -101,7 +101,9 @@ export const INITIAL_STATE = {
         frequencyCount: 4
       }
     ],
-    unlockedAchievementIds: ['ach-1', 'ach-2']
+    unlockedAchievementIds: ['ach-1', 'ach-2'],
+    // Logros que la persona ya vio en la sección "Tus logros" (para mostrar la etiqueta "¡Nuevo!")
+    seenAchievementIds: ['ach-1', 'ach-2']
   },
   coachHistory: [
     {
@@ -229,6 +231,13 @@ export const AppProvider = ({ children }) => {
       console.error('Error guardando en localStorage:', err)
     }
   }, [state])
+
+  // El aviso de logro se cierra solo para que no quede tapando contenido (Meta 3)
+  useEffect(() => {
+    if (!recentAchievement) return undefined
+    const timer = setTimeout(() => setRecentAchievement(null), 8000)
+    return () => clearTimeout(timer)
+  }, [recentAchievement])
 
   // Cálculos derivados para que todas las páginas (Partes 2 a 6) los consuman directamente
   const totalCaloriesToday = useMemo(() => {
@@ -553,32 +562,56 @@ export const AppProvider = ({ children }) => {
     })
   }
 
+  // La actividad nueva queda pendiente: los puntos se ganan al completarla, no al crearla
+  // (Feedback U06: Javier Escudero, el sistema de puntos debe tener sentido intuitivo).
+  // Devuelve el id creado (o null) para que la página pueda resaltarla.
   const addCustomHabitActivity = ({ title, category = 'entrenamiento', points = 15 }) => {
     const cleanTitle = String(title || '').trim()
-    if (!cleanTitle) return false
+    if (!cleanTitle) return null
 
+    const newId = `hab-${Date.now()}`
+
+    setState((prev) => ({
+      ...prev,
+      habits: {
+        ...prev.habits,
+        activities: [
+          ...prev.habits.activities,
+          {
+            id: newId,
+            title: cleanTitle,
+            category,
+            points: Number(points) || 15,
+            completed: false,
+            frequencyCount: 0,
+            isCustom: true
+          }
+        ]
+      }
+    }))
+    return newId
+  }
+
+  // Quitar una actividad propia agregada por error (mismo criterio que removeLoggedFood, Feedback U02).
+  // Los logros ya desbloqueados se mantienen.
+  const removeHabitActivity = (activityId) => {
+    setState((prev) => ({
+      ...prev,
+      habits: {
+        ...prev.habits,
+        activities: prev.habits.activities.filter((act) => act.id !== activityId)
+      }
+    }))
+  }
+
+  // Marca como vistos los logros desbloqueados (se llama al salir de la sección "Tus logros")
+  const markAchievementsSeen = () => {
     setState((prev) => {
-      const newAct = {
-        id: `hab-${Date.now()}`,
-        title: cleanTitle,
-        category,
-        points: Number(points) || 15,
-        completed: true,
-        frequencyCount: 1
-      }
-
-      const nextState = {
-        ...prev,
-        habits: {
-          ...prev.habits,
-          activities: [...prev.habits.activities, newAct]
-        }
-      }
-
-      nextState.habits.unlockedAchievementIds = evaluateAchievements(nextState)
-      return nextState
+      const unlocked = prev.habits.unlockedAchievementIds || []
+      const seen = prev.habits.seenAchievementIds
+      if (seen && unlocked.every((id) => seen.includes(id))) return prev
+      return { ...prev, habits: { ...prev.habits, seenAchievementIds: unlocked } }
     })
-    return true
   }
 
   // --- Configuración de Perfil y Metas (Hipótesis de Activación / Personalización) ---
@@ -623,6 +656,8 @@ export const AppProvider = ({ children }) => {
     toggleHabitActivity,
     triggerQuickHabitAction,
     addCustomHabitActivity,
+    removeHabitActivity,
+    markAchievementsSeen,
     updateUserProfile,
     resetDemoData
   }

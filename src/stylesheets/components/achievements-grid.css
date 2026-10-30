@@ -1,0 +1,146 @@
+/* Sección "Tus logros". Reemplaza las reglas .achievement-* que estaban en stylesheets/index.scss */
+
+.achievements__progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.achievements__track {
+  flex: 1;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.achievements__fill {
+  height: 100%;
+  background: #14b8a6;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.achievements__count {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f766e;
+  white-space: nowrap;
+}
+
+.achievements .section-card__helper {
+  margin-bottom: 0;
+}
+
+/* auto-fill: 2 columnas en el marco móvil y más en la vista ancha, sin depender del ancho de ventana */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.achievement-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 12px 12px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.achievement-card__icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.achievement-card__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.achievement-card__desc {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.35;
+  color: #475569;
+}
+
+.achievement-card__status {
+  margin-top: auto;
+  padding-top: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f766e;
+}
+
+/* Bloqueado: se distingue por borde punteado, candado y fondo gris.
+   No se usa opacity para que el texto mantenga su contraste. */
+.achievement-card--locked {
+  background: #f8fafc;
+  border-style: dashed;
+  border-color: #94a3b8;
+}
+
+.achievement-card--locked .achievement-card__icon {
+  filter: grayscale(1);
+}
+
+.achievement-card--locked .achievement-card__title {
+  color: #334155;
+}
+
+.achievement-card--locked .achievement-card__status {
+  color: #475569;
+}
+
+.achievement-card--unlocked {
+  background: #f0fdfa;
+  border-color: #5eead4;
+}
+
+/* Recién desbloqueado */
+.achievement-card--new {
+  background: #fffbeb;
+  border-color: #f59e0b;
+  animation: achievement-pop 0.6s ease-out 2;
+}
+
+.achievement-card--new .achievement-card__status {
+  color: #92400e;
+}
+
+.achievement-card__tag {
+  position: absolute;
+  top: -9px;
+  right: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f59e0b;
+  color: #451a03;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+@keyframes achievement-pop {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .achievement-card--new {
+    animation: none;
+  }
+
+  .achievements__fill {
+    transition: none;
+  }
+}
