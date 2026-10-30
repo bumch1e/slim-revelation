@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useApp } from '../context/AppContext'
+import FrequentFoods from '../components/frequent_foods'
+import DailyHistory from '../components/daily_history'
 
 export const CaloriesPage = () => {
   const {
@@ -105,55 +107,15 @@ export const CaloriesPage = () => {
         </form>
       </div>
 
-      <div className='section-card'>
-        <div className='section-card__header-row'>
-          <h3 className='section-card__heading'>Mis alimentos frecuentes</h3>
-          <span className='section-card__badge'>Toca para sumar</span>
-        </div>
-        <div className='chip-grid'>
-          {frequentFoods.map((item) => (
-            <button
-              key={item.id}
-              type='button'
-              className='food-chip'
-              onClick={() => addFrequentFoodToLog(item.id)}
-            >
-              <span className='food-chip__name'>{item.name}</span>
-              <span className='food-chip__kcal'>+{item.calories} kcal</span>
-            </button>
-          ))}
-        </div>
-      </div>
+      <FrequentFoods
+        foods={frequentFoods}
+        onAdd={(food) => addFrequentFoodToLog(food.id)}
+      />
 
-      <div className='section-card'>
-        <div className='section-card__header-row'>
-          <h3 className='section-card__heading'>Alimentos registrados hoy ({loggedFoods.length})</h3>
-          <span className='section-card__badge'>{totalCaloriesToday} kcal</span>
-        </div>
-        <ul className='item-list'>
-          {loggedFoods.map((entry) => (
-            <li key={entry.id} className='item-list__row'>
-              <div>
-                <p className='item-list__title'>{entry.name}</p>
-                <span className='item-list__meta'>
-                  {entry.mealType} · {entry.timestamp}
-                </span>
-              </div>
-              <div className='item-list__right'>
-                <span className='item-list__kcal'>{entry.calories} kcal</span>
-                <button
-                  type='button'
-                  className='item-list__delete'
-                  onClick={() => removeLoggedFood(entry.id)}
-                  title='Eliminar registro'
-                >
-                  Eliminar
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <DailyHistory
+        entries={loggedFoods.map((entry) => ({ ...entry, time: entry.timestamp }))}
+        onDelete={removeLoggedFood}
+      />
     </section>
   )
 }
