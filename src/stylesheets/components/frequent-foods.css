@@ -1,0 +1,63 @@
+.frequent-foods {
+  margin-block: 1.5rem;
+}
+
+.frequent-foods__title {
+  font-size: 1.25rem;
+  margin: 0 0 0.75rem;
+}
+
+.frequent-foods__empty {
+  color: #666;
+  max-width: 60ch;
+}
+
+.frequent-foods__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.frequent-foods__item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid #c9d6c3;
+  border-radius: 999px;
+  background: #f3f8f0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.frequent-foods__item:hover {
+  background: #e3efdc;
+}
+
+.frequent-foods__item:active {
+  transform: scale(0.97);
+}
+
+.frequent-foods__item:focus-visible {
+  outline: 3px solid #2f6f3e;
+  outline-offset: 2px;
+}
+
+.frequent-foods__name {
+  font-weight: 600;
+}
+
+.frequent-foods__kcal {
+  color: #555;
+  font-size: 0.875rem;
+}
+
+.frequent-foods__plus {
+  font-weight: 700;
+  color: #2f6f3e;
+}
