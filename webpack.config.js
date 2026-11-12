@@ -6,7 +6,10 @@ module.exports = (_, argv) => ({
   entry: './src/index.js',
   output: {
     filename: '[name].[contenthash].js',
-    publicPath: '/'
+    publicPath: argv.mode === 'production'
+      ? '/slim-revelation/'
+      : '/',
+    clean: true
   },
   plugins: [
     new MiniCssExtractPlugin({
