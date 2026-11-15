@@ -193,7 +193,7 @@
 
 #let exp1_time =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/experimento_1/tiempo.png"),
     caption: [Tiempo empleado en el experimento 1 entre iteraciones.]
   )
 }
@@ -204,7 +204,7 @@
 
 #let exp1_effort =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/experimento_1/esfuerzo.png"),
     caption: [Grado de esfuerzo en el experimento 1 entre iteraciones.]
   )
 }
@@ -215,7 +215,7 @@
 
 #let exp1_satisfaction =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/experimento_1/satisfaccion.png"),
     caption: [Escala de satisfacción en el experimento 1 entre iteraciones.]
   )
 }
@@ -226,7 +226,7 @@
 
 #let exp1_errors =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/experimento_1/errores.png"),
     caption: [Cantidad de errores percibidos en el experimento 1 entre iteraciones.]
   )
 }
@@ -237,7 +237,7 @@
 
 #let exp2_time =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/experimento_2/tiempo.png"),
     caption: [Tiempo empleado en el experimento 2 entre iteraciones.]
   )
 }
@@ -248,7 +248,7 @@
 
 #let exp2_effort =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/experimento_2/esfuerzo.png"),
     caption: [Grado de esfuerzo en el experimento 2 entre iteraciones.]
   )
 }
@@ -259,7 +259,7 @@
 
 #let exp2_satisfaction =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/experimento_2/satisfaccion.png"),
     caption: [Escala de satisfacción en el experimento 2 entre iteraciones.]
   )
 }
@@ -270,7 +270,7 @@
 
 #let exp2_errors =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/experimento_2/errores.png"),
     caption: [Cantidad de errores percibidos en el experimento 2 entre iteraciones.]
   )
 }
@@ -281,7 +281,7 @@
 
 #let exp3_time =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/experimento_3/tiempo.png"),
     caption: [Tiempo empleado en el experimento 3 entre iteraciones.]
   )
 }
@@ -292,7 +292,7 @@
 
 #let exp3_effort =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/experimento_3/esfuerzo.png"),
     caption: [Grado de esfuerzo en el experimento 3 entre iteraciones.]
   )
 }
@@ -303,7 +303,7 @@
 
 #let exp3_satisfaction =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/experimento_3/satisfaccion.png"),
     caption: [Escala de satisfacción en el experimento 3 entre iteraciones.]
   )
 }
@@ -314,7 +314,7 @@
 
 #let exp3_errors =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/experimento_3/errores.png"),
     caption: [Cantidad de errores percibidos en el experimento 3 entre iteraciones.]
   )
 }
@@ -325,7 +325,7 @@
 
 #let gen_time =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/general/tiempo.png"),
     caption: [Tiempo empleado entre experimentos.]
   )
 }
@@ -336,7 +336,7 @@
 
 #let gen_effort = {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/general/esfuerzo.png"),
     caption: [Grado de esfuerzo entre experimentos.]
   )
 }
@@ -347,7 +347,7 @@
 
 #let gen_satisfaction =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/general/satisfaccion.png"),
     caption: [Escala de satisfacción entre experimentos.]
   )
 }
@@ -358,7 +358,7 @@
 
 #let gen_errors =  {
   figure(
-    image(width: 70%, "/img/register-food.png"),
+    image(width: 70%, "/img/plots/general/errores.png"),
     caption: [Cantidad de errores percibidos entre experimentos.]
   )
 }
