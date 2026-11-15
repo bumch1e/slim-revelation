@@ -9,5 +9,10 @@ compile:
 	@typst c $(JOBNAME).typ
 	@echo "[+] Proyecto compilado!"
 
+plot:
+	@echo "[+] Creando gráficos..."
+	@python3 scripts/script.py
+	@echo "[+] Gráficos creados!"
+
 view:
 	@zathura $(JOBNAME).pdf
