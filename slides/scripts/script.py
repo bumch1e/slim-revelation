@@ -7,8 +7,8 @@ import numpy as np
 import pandas as pd
 
 
-ARCHIVO_CSV = "data.csv"
-CARPETA_GRAFICOS = "../img/plots"
+ARCHIVO_CSV = "scripts/data.csv"
+CARPETA_GRAFICOS = "img/plots"
 ITERACION_ACTUAL = 2
 
 METRICAS = {
